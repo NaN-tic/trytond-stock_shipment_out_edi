@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+         <record model="ir.ui.view" id="shipment_out_view_form">
+            <field name="model">stock.shipment.out</field>
+            <field name="inherit" ref="stock.shipment_out_view_form"/>
+            <field name="name">shipment_out_form</field>
+        </record>
+        <record model="ir.model.button" id="generate_edi_file">
+            <field name="name">generate_edi_file</field>
+            <field name="string">Generate EDI</field>
+            <field name="model" search="[('model', '=', 'stock.shipment.out')]" />
+        </record>
+        <record model="ir.ui.view" id="stock_configuration_view_form">
+          <field name="model">stock.configuration</field>
+          <field name="inherit" ref="stock.stock_configuration_view_form"/>
+          <field name="name">stock_configuration_form</field>
+      </record>
+    </data>
+</tryton>

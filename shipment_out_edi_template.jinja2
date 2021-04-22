@@ -1,0 +1,23 @@
+DESADV_D_96A_UN_EAN005
+BGM|{{shipment.number}}|351|9
+DTM|{{shipment.effective_date|replace('-','')}}|{{shipment.planned_date|replace('-','')}}
+RFF|DQ|{{shipment.rference}}|{{shipment.effective_date|replace('-','')}}
+NADMS|{{shipment.company.party.edi_operational_point}}
+NADMR|{{shipment.customer.edi_operational_point}}
+NADBY|{{shipment.company.party.edi_operational_point}}
+NADSU|{{shipment.customer.edi_operational_point}}
+NADDP|{{shipment.customer.edi_operational_point}}
+NADUC|{{shipment.customer.edi_operational_point}}
+NADSH|{{shipment.company.party.edi_operational_point}}
+TDT|30
+{% for move in shipment.outgoing_moves -%}
+LIN|{{move.product.code_ean13}}|EN|{{loop.index}}
+{% if move.lot -%}
+PIALIN||||{{move.lot.number}}
+{% endif -%}
+IMDLIN|F|{{move.product.name}}
+QTYLIN|12|{{move.quantity}}|{{UOMS.get(move.uom.symbol)}}
+{% if move.lot and move.lot.expiration_date -%}
+PCILIN|36E|{{move.lot.expiration_date|replace('-','')}}
+{% endif -%}
+{% endfor -%}
