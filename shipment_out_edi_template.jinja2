@@ -11,6 +11,7 @@ NADUC|{{shipment.customer.edi_operational_point}}
 NADSH|{{shipment.company.party.edi_operational_point}}
 TDT|30
 {% for move in shipment.outgoing_moves -%}
+CPS|1
 LIN|{{move.product.code_ean13}}|EN|{{loop.index}}
 {% if move.lot -%}
 PIALIN||||{{move.lot.number}}
