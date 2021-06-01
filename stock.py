@@ -27,20 +27,6 @@ class ShipmentOut(metaclass=PoolMeta):
                 'generate_edi_file': {'invisible': Eval('state') != 'done', },
                 })
 
-    def get_from_edi(self, name):
-        pool = Pool()
-        Sale = pool.get('sale.sale')
-
-        origins = self.origins.split(', ')
-        sales = Sale.search(['number', 'in', origins])
-
-        if not sales:
-            return False
-        for sale in sales:
-            if not sale.edi:
-                return False
-        return True
-
     @classmethod
     @ModelView.button
     def generate_edi_file(cls, shipments):
