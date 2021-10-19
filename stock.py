@@ -20,6 +20,8 @@ UOMS = {
 class ShipmentOut(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out'
 
+    is_edi = fields.Boolean('Is EDI')
+
     @classmethod
     def __setup__(cls):
         super(ShipmentOut, cls).__setup__()
@@ -31,7 +33,8 @@ class ShipmentOut(metaclass=PoolMeta):
     @ModelView.button
     def generate_edi_file(cls, shipments):
         for shipment in shipments:
-            shipment.generate_edi()
+            if shipment.is_edi:
+                shipment.generate_edi()
 
     @classmethod
     @ModelView.button
@@ -43,30 +46,20 @@ class ShipmentOut(metaclass=PoolMeta):
     def generate_edi(self):
         pool = Pool()
         StockConfiguration = pool.get('stock.configuration')
-        Sale = pool.get('sale.sale')
         config = StockConfiguration(1)
         template_name = 'shipment_out_edi_template.jinja2'
         result_name = 'shipment_{}.PLA'.format(self.number)
         template_path = os.path.join(MODULE_PATH, template_name)
         result_path = os.path.join(config.outbox_path_edi, result_name)
-        origins = self.origins.split(', ')
-        sales = Sale.search(['number', 'in', origins])
-        if len(sales) > 1:
-            for sale in sales:
-                if sale.edi:
-                    raise UserError(gettext(
-                        'stock_shipment_out.msg_no_unique_edi',
-                        number=self.number))
-        elif len(sales) == 1:
-            if sales[0].edi:
-                with open(template_path) as file_:
-                    template = Template(file_.read())
-                edi_file = template.render({'shipment': self, 'UOMS': UOMS})
-                with open(result_path, 'w') as f:
-                    f.write(edi_file)
+        if self.is_edi:
+            with open(template_path) as file_:
+                template = Template(file_.read())
+            edi_file = template.render({'shipment': self, 'UOMS': UOMS})
+            with open(result_path, 'w') as f:
+                f.write(edi_file)
 
 
 class StockConfiguration(metaclass=PoolMeta):
     __name__ = 'stock.configuration'
 
-    outbox_path_edi = fields.Char('Outbox Path EDI')
+    outbox_path_edi = fields.Char('EDI Shipment Outbox Path')
