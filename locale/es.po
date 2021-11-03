@@ -2,6 +2,14 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
+msgctxt "field:stock.configuration,outbox_path_edi:"
+msgid "EDI Shipment Outbox Path"
+msgstr "EDI Ruta de salida Albarán"
+
+msgctxt "field:stock.shipment.out,is_edi:"
+msgid "Is EDI"
+msgstr "Es EDI"
+
 msgctxt "model:ir.message,text:msg_no_unique_edi"
 msgid "Shipment \"%(number)s\" from EDI sale cannot have more that 1 origin."
 msgstr ""
