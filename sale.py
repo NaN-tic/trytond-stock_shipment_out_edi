@@ -6,7 +6,7 @@ class Sale(metaclass=PoolMeta):
 
     def create_shipment(self, shipment_type):
         shipment = super().create_shipment(shipment_type)
-        if shipment and shipment_type == 'out' and self.edi:
+        if shipment and shipment_type == 'out' and self.is_edi:
             shipment[0].edi = True
             if self.reference and self.number:
                 shipment[0].reference = self.reference + '-' + self.number
