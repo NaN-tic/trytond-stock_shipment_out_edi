@@ -3,8 +3,6 @@ from jinja2 import Template
 from trytond.model import Workflow, ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
-from trytond.exceptions import UserError
-from trytond.i18n import gettext
 
 MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -63,3 +61,16 @@ class StockConfiguration(metaclass=PoolMeta):
     __name__ = 'stock.configuration'
 
     outbox_path_edi = fields.Char('EDI Shipment Outbox Path')
+
+
+class Move(metaclass=PoolMeta):
+    __name__ = 'stock.move'
+
+    code_ean13 = fields.Function(fields.Char("Code EAN13"), 'get_code_ean13')
+
+    def get_code_ean13(self):
+        if self.product:
+            for identifier in self.product.identifiers:
+                if identifier.type == 'ean' and len(identifier.code) == 13:
+                    return identifier.code
+        return None

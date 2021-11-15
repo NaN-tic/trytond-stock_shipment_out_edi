@@ -12,7 +12,7 @@ NADSH|{{shipment.company.party.edi_operational_point}}
 TDT|30
 CPS|1
 {% for move in shipment.outgoing_moves -%}
-LIN|{{move.product.code_ean13}}|EN|{{loop.index}}
+LIN|{{move.code_ean13}}|EN|{{loop.index}}
 {% if move.lot -%}
 PIALIN|||||||||{{move.lot.number}}
 {% endif -%}
