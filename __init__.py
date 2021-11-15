@@ -10,6 +10,7 @@ def register():
     Pool.register(
         stock.ShipmentOut,
         stock.StockConfiguration,
+        stock.Move,
         sale.Sale,
         module='stock_shipment_out_edi', type_='model')
     Pool.register(
