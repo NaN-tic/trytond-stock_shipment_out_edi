@@ -6,5 +6,8 @@ this repository contains the full copyright notices and license terms. -->
       <record model="ir.message" id="msg_no_unique_edi">
         <field name="text">Shipment "%(number)s" from EDI sale cannot have more that 1 origin.</field>
       </record>
+        <record model="ir.message" id="msg_send_edi_shipment">
+            <field name="text">The shipment %(shipment)s will be processed and sended the EDI file.</field>
+        </record>
     </data>
 </tryton>

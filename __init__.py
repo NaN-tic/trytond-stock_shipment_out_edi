@@ -4,16 +4,13 @@
 from trytond.pool import Pool
 from . import stock
 from . import sale
+from . import configuration
 
 
 def register():
     Pool.register(
         stock.ShipmentOut,
-        stock.StockConfiguration,
         stock.Move,
         sale.Sale,
+        configuration.StockConfiguration,
         module='stock_shipment_out_edi', type_='model')
-    Pool.register(
-        module='stock_shipment_out_edi', type_='wizard')
-    Pool.register(
-        module='stock_shipment_out_edi', type_='report')
