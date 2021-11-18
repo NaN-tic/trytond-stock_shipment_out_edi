@@ -4,6 +4,8 @@
 <data>
     <xpath expr="/form" position="inside">
         <label name="outbox_path_edi"/>
-        <field name="outbox_path_edi" colspan="3"/>
+        <field name="outbox_path_edi"/>
+        <label name="automatic_edi_shipment_out"/>
+        <field name="automatic_edi_shipment_out"/>
     </xpath>
 </data>
