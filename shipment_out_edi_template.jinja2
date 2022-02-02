@@ -19,7 +19,7 @@ PIALIN||{{ move.product.code }}|||||||{{ move.lot.number }}
 {% else -%}
 PIALIN||{{ move.product.code }}|||||||
 {% endif -%}
-IMDLIN|F|{{ move.product.name|truncate(35) }}
+IMDLIN|F|{{ move.product.name|truncate(35, False, '', 0) }}
 QTYLIN|12|{{ move.quantity }}|{{ UOMS.get(move.uom.symbol) }}
 {% if move.lot -%}
 PCILIN|36E|{% if move.lot.expiration_date -%}{{ move.lot.expiration_date|replace('-','') }}{% endif -%}||||||{{ move.lot.number }}
