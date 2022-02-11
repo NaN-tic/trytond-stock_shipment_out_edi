@@ -1,15 +1,15 @@
 DESADV_D_96A_UN_EAN005
 BGM|{{ shipment.number }}|351|9
 DTM|{{ shipment.effective_date|replace('-','') }}|{{ shipment.planned_date|replace('-','') }}
-RFF|DQ|{{ shipment.reference }}|{{ shipment.effective_date|replace('-','') }}
+RFF|DQ|{{ shipment.number }}|{{ shipment.effective_date|replace('-','') }}
 RFF|ON|{{ shipment.reference }}|{{ shipment.effective_date|replace('-','') }}
 NADMS|{{ shipment.company.party.edi_operational_point }}
 NADMR|{{ shipment.customer.edi_operational_point }}
-NADBY|{{ shipment.company.party.edi_operational_point }}
-NADSU|{{ shipment.customer.edi_operational_point }}
-NADDP|{{ shipment.customer.edi_operational_point }}
-NADUC|{{ shipment.customer.edi_operational_point }}
-NADSH|{{ shipment.company.party.edi_operational_point }}
+NADBY|{{ shipment.customer.edi_operational_point }}
+NADSU|{{ shipment.company.party.edi_operational_point }}
+NADDP|{{ shipment.delivery_address.edi_ean }}
+NADUC|{{ shipment.delivery_address.edi_ean }}
+NADSH|{{ shipment.warehouse.address.edi_ean }}
 TDT|30
 CPS|1
 {% for move in shipment.outgoing_moves -%}
