@@ -3,10 +3,10 @@ BGM|{{ shipment.number }}|351|9
 DTM|{{ shipment.effective_date|replace('-','') }}|{{ shipment.planned_date|replace('-','') }}
 RFF|DQ|{{ shipment.number }}|{{ shipment.effective_date|replace('-','') }}
 RFF|ON|{{ shipment.reference }}|{{ shipment.effective_date|replace('-','') }}
-NADMS|{{ shipment.company.party.edi_operational_point }}
-NADMR|{{ shipment.customer.edi_operational_point }}
-NADBY|{{ shipment.customer.edi_operational_point }}
-NADSU|{{ shipment.company.party.edi_operational_point }}
+NADMS|{{ shipment.company.party.edi_operational_point_head }}
+NADMR|{{ shipment.customer.edi_operational_point_head }}
+NADBY|{{ shipment.customer.edi_operational_point_head }}
+NADSU|{{ shipment.company.party.edi_operational_point_head }}
 NADDP|{{ shipment.delivery_address.edi_ean }}
 NADUC|{{ shipment.delivery_address.edi_ean }}
 NADSH|{{ shipment.warehouse.address.edi_ean }}
