@@ -5,7 +5,11 @@ RFF|DQ|{{ shipment.number }}|{{ shipment.effective_date|replace('-','') }}
 RFF|ON|{{ shipment.reference }}|{{ shipment.effective_date|replace('-','') }}
 NADMS|{{ shipment.company.party.edi_operational_point_head }}
 NADMR|{{ shipment.customer.edi_operational_point_head }}
+{% if move.origin -%}
+NADBY|{{ shipment.orign.party.edi_operational_point_head }}
+{% else -%}
 NADBY|{{ shipment.customer.edi_operational_point_head }}
+{% endif -%}
 NADSU|{{ shipment.company.party.edi_operational_point_head }}
 NADDP|{{ shipment.delivery_address.edi_ean }}
 NADUC|{{ shipment.delivery_address.edi_ean }}
@@ -14,7 +18,7 @@ TDT|30
 CPS|1
 {% for move in shipment.outgoing_moves -%}
 LIN|{{ move.code_ean13 }}|EN|{{ loop.index }}
-{% if move.lot -%}
+{% if move.get('lot') -%}
 PIALIN||{{ move.product.code }}|||||||{{ move.lot.number }}
 {% else -%}
 PIALIN||{{ move.product.code }}|||||||
