@@ -18,7 +18,7 @@ TDT|30
 CPS|1
 {% for move in shipment.outgoing_moves -%}
 LIN|{{ move.code_ean13 }}|EN|{{ loop.index }}
-{% if move.get('lot') -%}
+{% if move.lot -%}
 PIALIN||{{ move.product.code }}|||||||{{ move.lot.number }}
 {% else -%}
 PIALIN||{{ move.product.code }}|||||||
