@@ -6,7 +6,7 @@ RFF|ON|{{ shipment.reference }}|{{ shipment.effective_date|replace('-','') }}
 NADMS|{{ shipment.company.party.edi_operational_point_head }}
 NADMR|{{ shipment.customer.edi_operational_point_head }}
 {% if move.origin -%}
-NADBY|{{ shipment.orign.party.edi_operational_point_head }}
+NADBY|{{ shipment.edi_operational_point_head }}
 {% else -%}
 NADBY|{{ shipment.customer.edi_operational_point_head }}
 {% endif -%}
