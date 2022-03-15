@@ -83,6 +83,15 @@ class ShipmentOut(metaclass=PoolMeta):
             with open(result_path, 'w') as f:
                 f.write(edi_file)
 
+    @property
+    def edi_operational_point_head(self):
+        SaleLine = Pool().get('sale.line')
+
+        for m in self.outgoing_moves:
+            if m.origin and isinstance(m.origin, SaleLine):
+                return m.origin.sale.party.edi_operational_point_head
+        return self.customer.edi_operational_point_head
+
 
 class Move(metaclass=PoolMeta):
     __name__ = 'stock.move'
