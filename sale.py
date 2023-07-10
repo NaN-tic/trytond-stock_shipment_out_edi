@@ -11,7 +11,7 @@ class Sale(metaclass=PoolMeta):
             return shipments
 
         for shipment in shipments:
-            shipment.edi = True
+            shipment.is_edi = True
             if self.reference and self.number:
                 shipment.reference = self.reference + '-' + self.number
         return shipments
