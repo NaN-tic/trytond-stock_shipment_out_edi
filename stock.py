@@ -7,7 +7,7 @@ from trytond.model import Workflow, ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval, Not
 from trytond.transaction import Transaction
-from trytond.exceptions import UserWarning
+from trytond.exceptions import UserError, UserWarning
 from trytond.i18n import gettext
 
 MODULE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -71,7 +71,12 @@ class ShipmentOut(metaclass=PoolMeta):
     def generate_edi(self):
         pool = Pool()
         StockConfiguration = pool.get('stock.configuration')
+
         config = StockConfiguration(1)
+        if not config.outbox_path_edi:
+            raise UserError(
+                gettext('stock_shipment_out_edi.msg_missing_outbox_path_edi'))
+
         template_name = 'shipment_out_edi_template.jinja2'
         result_name = 'shipment_{}.PLA'.format(self.number)
         template_path = os.path.join(MODULE_PATH, template_name)
