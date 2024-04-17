@@ -63,8 +63,8 @@ class ShipmentOut(metaclass=PoolMeta):
     @classmethod
     @ModelView.button
     @Workflow.transition('done')
-    def done(cls, shipments):
-        super(ShipmentOut, cls).done(shipments)
+    def do(cls, shipments):
+        super(ShipmentOut, cls).do(shipments)
         with Transaction().set_context(done_edi_shipment=True):
             cls.generate_edi_file(shipments)
 
