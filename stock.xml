@@ -11,7 +11,7 @@
         <record model="ir.model.button" id="generate_edi_file">
             <field name="name">generate_edi_file</field>
             <field name="string">Generate EDI</field>
-            <field name="model" search="[('model', '=', 'stock.shipment.out')]" />
+            <field name="model">stock.shipment.out</field>
         </record>
     </data>
 </tryton>
